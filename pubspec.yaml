@@ -1,0 +1,96 @@
+name: data_masking
+description: Production-ready data masking vault (encrypted storage, export/import, share).
+publish_to: "none"
+
+version: 2.3.4+7
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Persistent storage (IndexedDB on web)
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Crypto (AES-GCM + PBKDF2)
+  cryptography: ^2.9.0
+
+  # IDs
+  uuid: ^4.5.2
+
+  # Import (file picker)
+  file_picker: ^10.3.10
+
+  # Web download/export
+  universal_html: ^2.3.0
+
+  # Share
+  share_plus: ^12.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # App icon generator (Android/iOS/Web/Windows)
+  flutter_launcher_icons: ^0.14.4
+
+  # MSIX packaging for Windows / Microsoft Store
+  msix: ^3.16.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/app_icon.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: assets/app_icon.png
+
+  # Generate Windows runner icon
+  windows:
+    generate: true
+    image_path: assets/app_icon.png
+    icon_size: 256
+
+  web:
+    generate: true
+    image_path: assets/app_icon.png
+    background_color: "#121212"
+    theme_color: "#1DB954"
+
+# --------------------------------------------
+# Microsoft Store / MSIX packaging configuration
+# --------------------------------------------
+msix_config:
+  # What users see (must match the name you reserved in Partner Center)
+  display_name: "Data masking"
+  publisher_display_name: "cyph3r"
+
+  # MUST match Partner Center "View product identity"
+  identity_name: "cyph3r.Datamasking"
+  publisher: "CN=7456A62D-B4E5-49F3-9485-ADF80146DE6A"
+
+  # Store requires Revision (4th) = 0
+  msix_version: "1.1.3.0"
+
+  # App branding
+  logo_path: "assets/app_icon.png"
+
+  # Target arch
+  architecture: "x64"
+
+  # Capabilities
+  capabilities: "internetClient"
+
+  # Store signs the package
+  sign_msix: false
+
+  # References (not required by msix tool; for your records)
+  # package_family_name: "cyph3r.Datamasking_fb6bh328pz6dt"
+  # store_id: "9N1G53BCP8PK"
